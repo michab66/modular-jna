@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>${rawGroupId}</groupId>
+  <artifactId>${rawArtifactId}</artifactId>
+  <version>${rawVersion}.module</version>
+
+  <properties>
+	<rawGroupId>net.java.dev.jna</rawGroupId>
+	<rawArtifactId>jna-platform</rawArtifactId>
+	<rawVersion>5.5.0</rawVersion>
+	
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+  </properties>
+
+  <build>  
+    <plugins>
+	
+	<plugin>
+	   <groupId>org.apache.maven.plugins</groupId>
+	   <artifactId>maven-install-plugin</artifactId>
+	   <version>2.5.1</version>
+	   <configuration>
+		  <groupId>${project.groupId}</groupId>
+		  <artifactId>${project.artifactId}</artifactId>
+		  <version>${project.version}</version>
+		  <packaging>jar</packaging>
+		  <file>${project.build.directory}/modules/${project.artifactId}-${rawVersion}.jar</file>
+		  <generatePom>true</generatePom>
+	   </configuration>
+	   <executions>
+		  <execution>
+			 <id>install-jar-lib</id>
+			 <goals>
+				<goal>install-file</goal>
+			 </goals>
+			 <phase>install</phase>
+		  </execution>
+	   </executions>
+	</plugin>
+	
+      <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.0.0.Beta2</version>
+        <executions>
+            <execution>
+                <id>add-module-infos</id>
+                <phase>compile</phase>
+                <goals>
+                    <goal>add-module-info</goal>
+                </goals>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                    <modules>
+                        <module>
+                            <artifact>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>${project.artifactId}</artifactId>
+                                <version>${rawVersion}</version>
+                            </artifact>
+                            <moduleInfoSource>
+								module com.sun.jna.platform
+								{
+//									exports com.sun.jna.platform.win32.COM.util;
+									exports com.sun.jna.platform.wince;
+									exports com.sun.jna.platform.win32;
+									exports com.sun.jna.platform.linux;
+									exports com.sun.jna.platform.mac;
+//									exports com.sun.jna.platform.win32.COM.tlb.imp;
+//									exports com.sun.jna.platform.win32.COM.tlb;
+//									exports com.sun.jna.platform.win32.COM.util.annotation;
+//									exports com.sun.jna.platform.unix.solaris;
+									exports com.sun.jna.platform.unix;
+									exports com.sun.jna.platform.dnd;
+									exports com.sun.jna.platform;
+//									exports com.sun.jna.platform.win32.COM;
+
+									requires com.sun.jna;
+									requires java.datatransfer;
+									requires java.desktop;
+									requires java.logging;
+									requires java.sql;
+								}
+                            </moduleInfoSource>
+                        </module>
+                    </modules>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    </plugins>
+  </build>
+  
+</project>
