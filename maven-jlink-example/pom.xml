@@ -14,51 +14,80 @@
   
     <build>
         <plugins>
-    
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-            </plugin>
-        
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jlink-plugin</artifactId>
-                <version>3.0.0-alpha-2-SNAPSHOT</version>
-                <!-- <version>3.0.0-alpha-1</version> -->
-                <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>8.0.1</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <noHeaderFiles>true</noHeaderFiles>
-                    <noManPages>true</noManPages>
-                </configuration>
-            </plugin>
-<!--        
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jmod-plugin</artifactId>
-                <version>3.0.0-alpha-2-SNAPSHOT</version>
-                <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>8.0.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
--->               
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <encoding>ISO-8859-1</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jlink-plugin</artifactId>
+        <version>3.0.0-alpha-micbinz-SNAPSHOT</version>
+        <extensions>true</extensions>
+        <configuration>
+			<noHeaderFiles>true</noHeaderFiles>
+			<noManPages>true</noManPages>
+            <includeLocales>en,de</includeLocales>
+            <excludeModules>
+                <module>javafx.baseEmpty</module>
+                <module>javafx.controlsEmpty</module>
+                <module>javafx.graphicsEmpty</module>
+                <module>javafx.fxmlEmpty</module>
+                <module>javafx.swingEmpty</module>
+            </excludeModules>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jmod-plugin</artifactId>
+        <!-- Ensure we get the fix from MJMOD-23 (https://issues.apache.org/jira/browse/MJMOD-23) -->
+        <version>3.0.0-alpha-micbinz-SNAPSHOT</version>
+        <extensions>true</extensions>
+        <dependencies>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>6.2</version> <!-- Use newer version of ASM -->
+        </dependency>
+    </dependencies>
+      </plugin>
+
+
         </plugins>
     </build>
   
     <modules>
         <module>thejar</module>
-        <module>thejlink</module>
     </modules>
+    
+  <dependencies>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>5.5.0.module</version>
+    </dependency>
+    <dependency>
+        <groupId>net.java.dev.jna</groupId>
+        <artifactId>jna-platform</artifactId>
+        <version>5.5.0.module</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.6</version>
+    </dependency>
+  </dependencies>    
 </project>
