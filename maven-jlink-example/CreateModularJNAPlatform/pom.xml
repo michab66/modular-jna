@@ -63,14 +63,27 @@
                                 <version>${rawVersion}</version>
                             </artifact>
                             <moduleInfoSource>
-								module com.sun.jna
+								module com.sun.jna.platform
 								{
-									exports com.sun.jna.win32;
-									exports com.sun.jna;
-									exports com.sun.jna.ptr;
+//									exports com.sun.jna.platform.win32.COM.util;
+									exports com.sun.jna.platform.wince;
+									exports com.sun.jna.platform.win32;
+									exports com.sun.jna.platform.linux;
+									exports com.sun.jna.platform.mac;
+//									exports com.sun.jna.platform.win32.COM.tlb.imp;
+//									exports com.sun.jna.platform.win32.COM.tlb;
+//									exports com.sun.jna.platform.win32.COM.util.annotation;
+//									exports com.sun.jna.platform.unix.solaris;
+									exports com.sun.jna.platform.unix;
+									exports com.sun.jna.platform.dnd;
+									exports com.sun.jna.platform;
+//									exports com.sun.jna.platform.win32.COM;
 
+									requires com.sun.jna;
+									requires java.datatransfer;
 									requires java.desktop;
 									requires java.logging;
+									requires java.sql;
 								}
                             </moduleInfoSource>
                         </module>
@@ -80,5 +93,6 @@
         </executions>
     </plugin>
     </plugins>
-  </build>  
+  </build>
+  
 </project>
