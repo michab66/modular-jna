@@ -16,6 +16,7 @@ Execute 'mvn clean package' in the .../maven-jlink-example dir.
 
 # Execute result
 `cd thejar`
+
 `target/maven-jlink/bin/java -m thejar/biz.dsuk.jar.Main`
 
 ## Windows
