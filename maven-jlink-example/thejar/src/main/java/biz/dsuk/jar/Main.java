@@ -5,6 +5,10 @@ import com.sun.jna.ptr.IntByReference;
 public class Main {
 
     public static void main(String[] args) {
+		
+		// Activate JNA tracing.
+		System.setProperty( "jna.debug_load", "true" );
+		
         System.out.printf("Hello from %s%n", Main.class.getName());
 
 		// Test using GSON
