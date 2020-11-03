@@ -1,5 +1,5 @@
 # modular-jna
-Temporary testing.
+Temporary testing. See [discussion](https://groups.google.com/g/jna-users/c/c7__3PprLm8/m/phHNrqTgAAAJ).
 
 # Install
 
